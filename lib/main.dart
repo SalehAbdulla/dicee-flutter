@@ -1,19 +1,27 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 void main() {
   return runApp(MaterialApp(
-    home: SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.red,
-        appBar: AppBar(title: Text('Dicee'), backgroundColor: Colors.red),
-        body: DicePage(),
-      ),
+    home: Scaffold(
+      backgroundColor: Colors.red,
+      appBar: AppBar(title: Text('Dice'), backgroundColor: Colors.red),
+      body: DicePage(),
     ),
   ));
 }
 
-class DicePage extends StatelessWidget {
+class DicePage extends StatefulWidget {
   const DicePage({super.key});
+
+  @override
+  State<DicePage> createState() => _DicePageState();
+}
+
+class _DicePageState extends State<DicePage> {
+  int randomNumber1 = 1;
+  int randomNumber2 = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -22,15 +30,28 @@ class DicePage extends StatelessWidget {
       children: [
         Flexible(
           child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Image(image: AssetImage('images/dice1.png')),
+            padding: const EdgeInsets.all(10.0),
+            child: TextButton(
+              onPressed: () {
+                setState(() {
+                  randomNumber1 = Random().nextInt(6) + 1;
+                });
+              },
+              child: Image(image: AssetImage('images/dice$randomNumber1.png')),
+            ),
           ),
         ),
-        SizedBox(width: 12),
         Flexible(
           child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Image(image: AssetImage('images/dice2.png')),
+            padding: const EdgeInsets.all(10.0),
+            child: TextButton(
+              onPressed: () {
+                setState(() {
+                  randomNumber2 = Random().nextInt(6) + 1;
+                });
+              },
+              child: Image(image: AssetImage('images/dice$randomNumber2.png')),
+            ),
           ),
         ),
       ],
